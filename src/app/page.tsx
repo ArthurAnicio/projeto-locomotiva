@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import CardWagon from "@/features/components/cardwagon";
+import AddWagonForm from "@/features/components/addWagonForm";
 import '../../public/locomotiva.svg'
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
         <CardWagon type="combustivel" delete={console.log}/> 
         <CardWagon type="passageiro" delete={console.log}/> 
       </div>
+      <AddWagonForm/>
     </div>
   );
 }
