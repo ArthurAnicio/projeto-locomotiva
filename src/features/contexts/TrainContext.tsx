@@ -1,13 +1,13 @@
 import React, { createContext, useContext, useState, useMemo, useCallback } from "react";
 
-export interface Locomotive{
+interface Locomotive{
     
     id:number
     weigthLimit:number
 
 }
 
-export interface Wagon{
+interface Wagon{
 
     id:number
     type: "carga" | "passageiro" | "combustivel"
@@ -16,7 +16,7 @@ export interface Wagon{
 
 }
 
-export interface Train{
+interface Train{
 
     id:number
     locomotive: Locomotive

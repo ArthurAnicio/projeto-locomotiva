@@ -1,5 +1,6 @@
 import styles from './CardWagon.module.css'
 import Image from "next/image";
+import WagonImage from '../wagonImage';
 
 interface CardWagonProps{
     type: string
@@ -7,16 +8,11 @@ interface CardWagonProps{
 }
 
 export default function CardWagon(props:CardWagonProps){
-
-    const image = props.type == "carga"? 'vagaoCarga.svg':
-                  props.type == "passageiro"? 'vagaoTransporte.svg':
-                  props.type == "combustivel" ? 'vagaoCombustivel.svg':
-                  null
     
     return(
         <div className={styles.card}>
             <h2>{props.type}</h2>
-            <Image src={`/${image}`} alt='' width={80} height={80}/>
+            <WagonImage type={props.type} width={80} heigth={80} />
             <button className={styles.remover}>Remover</button>
         </div>
     )
