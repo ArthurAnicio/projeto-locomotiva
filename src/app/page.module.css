@@ -1,6 +1,63 @@
+.locomotive{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 30px;
+}
+
+.let{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.letButton{
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--blue-p);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.letButton:hover{
+    background: var(--blue-s);
+    scale: 0.95;
+}
+
+#disabled{
+    background: var(--gray-s);
+    cursor: not-allowed;
+    scale: 0.95;
+}
+
+.totals{
+    display: flex;
+    flex-direction: column;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.totals p{
+    display: flex;
+    margin: 30px ;
+    padding: 15px;
+    border: solid 5px var(--white);
+    border-radius: 1rem;
+}
+
+.label{
+    margin: 0 20px;
+}
+
 .wagonsArea {
     background: var(--black);
-    min-height: 75vh;
     margin-top: 50px;
     padding: 10px;
     border-top: solid 8px var(--gray-t);
@@ -31,7 +88,7 @@
     margin: 0 5px;
     padding: 10px 20px;
     border-radius: 8px;
-    font-size: 24px;
+    font-size: 30px;
     font-weight: 700;
     margin-bottom: 10px;
     cursor: pointer;

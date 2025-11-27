@@ -7,6 +7,7 @@ import WagonOption from '../wagonOption';
 
 interface FormWagon{
     exit: ()=>void
+    add: ()=>void
 }
 
 export default function AddWagonForm(props:FormWagon){
@@ -25,6 +26,7 @@ export default function AddWagonForm(props:FormWagon){
         const newWagons = [...wagons,wagon]
         setWagons(newWagons);
         sessionStorage.setItem("wagons", JSON.stringify(newWagons))
+        props.add()
         props.exit()
     } else {
         console.log('Não pode')
