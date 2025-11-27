@@ -1,10 +1,9 @@
 import styles from './CardWagon.module.css'
-import Image from "next/image";
 import WagonImage from '../wagonImage';
 
 interface CardWagonProps{
     type: string
-    delete: ()=>void
+    delete: (e:number)=>void
 }
 
 export default function CardWagon(props:CardWagonProps){

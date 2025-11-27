@@ -1,3 +1,57 @@
+.wagonsArea {
+    background: var(--black);
+    min-height: 75vh;
+    margin-top: 50px;
+    padding: 10px;
+    border-top: solid 8px var(--gray-t);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
 .wagons{
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.head{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.clean, .add{
+    color: var(--white);
+    border: none;
+    margin: 0 5px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.clean{
+    background: var(--red-p);
+}
+
+.add{
+    background: var(--blue-p);
+}
+
+.clean:hover{
+    background: var(--red-s);
+    scale: 0.95;
+}
+
+.add:hover{
+    background: var(--blue-s);
+    scale: 0.95;
 }

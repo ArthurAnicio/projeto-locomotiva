@@ -23,18 +23,45 @@ export default function Home() {
     }
   },[wagons])
 
+  function deleteWagon(id:number){
+    const newWagons = wagons.filter((wagon:Wagon)=>wagon.id !== id)
+    setWagons(newWagons)
+    sessionStorage.setItem("wagons",JSON.stringify(newWagons))
+  }
+
   return (
     <div>
       <Image src='/locomotiva.svg' alt="" width={100} height={100}/>
-      <button onClick={()=>setFormOn(true)}>Adicionar</button>
-      <div className={styles.wagons}>
-        {wagons.map((wagon:Wagon)=>
-          <CardWagon        
-            type={wagon.type}
-            key={wagon.id} 
-            delete={console.log} 
-          />
-        )}
+      <div className={styles.wagonsArea}>
+        <div className={styles.head}>
+          <h1>Vagões Carrilhados</h1>
+          <div>
+            <button 
+              onClick={()=>setFormOn(true)}
+              className={styles.add}
+            >
+              Adicionar
+            </button>
+            <button 
+              className={styles.clean}
+              onClick={()=>{
+                setWagons([])
+                sessionStorage.setItem("wagons",JSON.stringify([]))
+              }}
+            >
+              Limpar
+            </button>
+          </div>
+        </div>
+        <div className={styles.wagons}>
+          {wagons.map((wagon:Wagon)=>
+            <CardWagon        
+              type={wagon.type}
+              key={wagon.id} 
+              delete={(e)=>deleteWagon(e)} 
+            />
+          )}
+        </div>
       </div>
       {formOn && <AddWagonForm exit={()=>setFormOn(false)}/>}
     </div>
