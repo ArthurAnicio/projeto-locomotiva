@@ -25,9 +25,13 @@ export default function Home() {
   }, [wagons])
 
   useEffect(()=>{
-    setTotalLength(getTotal('length',wagons))
-    setTotalWeight(getTotal('weight',wagons))
-    if(totalWeight >= 200 || wagons.length < 1){
+    const length = getTotal("length", wagons);
+    const weight = getTotal("weight", wagons);
+
+    setTotalLength(length);
+    setTotalWeight(weight);
+
+    if (weight >= 200 || wagons.length < 1) {
       setStatus(0)
     }else{
       if(status!==2){
