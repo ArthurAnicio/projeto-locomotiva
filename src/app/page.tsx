@@ -55,10 +55,11 @@ export default function Home() {
         </div>
         <div className={styles.wagons}>
           {wagons.map((wagon:Wagon)=>
-            <CardWagon        
+            <CardWagon
+              id={wagon.id}      
               type={wagon.type}
-              key={wagon.id} 
-              delete={(e)=>deleteWagon(e)} 
+              key={wagon.id}
+              delete={(e) => deleteWagon(e)}
             />
           )}
         </div>
