@@ -6,8 +6,6 @@ import AddWagonForm from "@/features/components/addWagonForm";
 import '../../public/locomotiva.svg'
 import { useState, useEffect } from "react";
 import { Wagon } from "@/features/classes/wagon";
-import { json } from "stream/consumers";
-import { stringify } from "querystring";
 
 export default function Home() {
   
@@ -19,21 +17,26 @@ export default function Home() {
     const store = JSON.parse(sessionStorage.getItem("wagons") || "[]") as Wagon[];
     if(store){
       setWagons(store)
+      console.log(wagons)
     }else{
       sessionStorage.setItem("wagons",JSON.stringify(wagons))
     }
-  },[])
+  },[wagons])
 
   return (
     <div>
       <Image src='/locomotiva.svg' alt="" width={100} height={100}/>
       <button onClick={()=>setFormOn(true)}>Adicionar</button>
       <div className={styles.wagons}>
-        <CardWagon type="carga" delete={console.log}/>
-        <CardWagon type="combustivel" delete={console.log}/> 
-        <CardWagon type="passageiro" delete={console.log}/> 
+        {wagons.map((wagon:Wagon)=>
+          <CardWagon        
+            type={wagon.type}
+            key={wagon.id} 
+            delete={console.log} 
+          />
+        )}
       </div>
-      {formOn && <AddWagonForm exite={()=>setFormOn(false)}/>}
+      {formOn && <AddWagonForm exit={()=>setFormOn(false)}/>}
     </div>
   );
 }

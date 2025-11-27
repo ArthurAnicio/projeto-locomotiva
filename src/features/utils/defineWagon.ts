@@ -1,26 +1,33 @@
-import { Wagon } from "../classes/wagon"
+import { Wagon } from "../contexts/TrainContext"
 
-export function newWagon(type:string){
+export function newWagon(type:string): Wagon{
     if(type=='carga'){
-        return new Wagon(
-            Math.random()*1000+1, 
+        return {
+            id:Math.random()*100000+1, 
             type, 
-            12, 
-            30,
-        )
+            length:12, 
+            weight: 30,
+        }
     }else if(type=='passageiro'){
-        return new Wagon(
-            Math.random()*1000+1,
+        return {
+            id:Math.random()*100000+1,
             type,
-            15,
-            25, 
-        )
+            length:15,
+            weight: 25, 
+        }
     }else if(type=='combustivel'){
-        return new Wagon(
-            Math.random()*1000+1,
+        return {
+            id:Math.random()*100000+1,
             type,
-            16,
-            28,
-        )
+            length:16,
+            weight: 28,
+        }
+    }else{
+        return {
+            id:Math.random()*100000+1,
+            type:'passageiro',
+            length:16,
+            weight: 28,
+        }
     }
 }

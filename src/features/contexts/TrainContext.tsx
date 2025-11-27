@@ -7,7 +7,7 @@ interface Locomotive{
 
 }
 
-interface Wagon{
+export interface Wagon{
 
     id:number
     type: "carga" | "passageiro" | "combustivel"
