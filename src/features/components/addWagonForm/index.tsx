@@ -1,5 +1,5 @@
 "use client"
-import {  useEffect, useState } from 'react'
+import { useState } from 'react'
 import styles from './addWagon.module.css'
 import { newWagon } from '@/features/utils/defineWagon'
 import { useTrain, Wagon } from "@/features/contexts/TrainContext";

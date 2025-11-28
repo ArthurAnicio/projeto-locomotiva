@@ -2,7 +2,7 @@ import styles from './popUp.module.css'
 import { useTrain } from '@/features/contexts/TrainContext'
 
 interface PopUpDeleteProps{
-    id: number
+    id: string
     cancel: ()=>void
 }
 
@@ -10,7 +10,7 @@ export default function PopUpDelete(props:PopUpDeleteProps){
 
     const { removeWagon } = useTrain();
 
-    function confirm(id:number){
+    function confirm(id:string){
         removeWagon(id)
         props.cancel()
     }

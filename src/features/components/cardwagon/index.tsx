@@ -4,7 +4,7 @@ import { useState } from 'react';
 import PopUpDelete from '../popUpDelete';
 
 interface CardWagonProps{
-    id: number
+    id: string
     type: string
     delete: (i:number)=>void
 }

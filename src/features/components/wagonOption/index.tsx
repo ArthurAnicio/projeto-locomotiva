@@ -1,6 +1,5 @@
 import styles from './wagonOption.module.css'
 import WagonImage from '../wagonImage'
-import { useEffect, useState } from 'react'
 
 interface WagonOptionProps{
     type: string

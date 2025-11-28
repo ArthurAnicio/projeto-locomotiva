@@ -9,7 +9,7 @@ import React, {
 } from "react"
 
 export interface Wagon {
-  id: number;
+  id:string;
   type: "carga" | "passageiro" | "combustivel"
   length: number
   weight: number
@@ -20,7 +20,7 @@ interface TrainContextType {
   totalWeight: number
   totalLength: number
   addWagon: (wagon: Wagon) => void
-  removeWagon: (id: number) => void
+  removeWagon: (id: string) => void
   clearWagons: () => void
 }
 
@@ -34,7 +34,7 @@ export function TrainProvider({ children }: { children: React.ReactNode }) {
     setWagons((prev) => [...prev, wagon])
   }, [])
 
-  const removeWagon = useCallback((id: number) => {
+  const removeWagon = useCallback((id: string) => {
     setWagons((prev) => prev.filter((w) => w.id !== id))
   }, [])
 
