@@ -2,41 +2,27 @@
 import {  useEffect, useState } from 'react'
 import styles from './addWagon.module.css'
 import { newWagon } from '@/features/utils/defineWagon'
-import { Wagon } from '@/features/classes/wagon';
+import { useTrain, Wagon } from "@/features/contexts/TrainContext";
 import WagonOption from '../wagonOption';
 
 interface FormWagon{
     exit: ()=>void
-    add: ()=>void
 }
 
 export default function AddWagonForm(props:FormWagon){
 
-    const[wagons,setWagons] = useState<Wagon[]>([])
-    const [type,setType] = useState('')
+  const [type, setType] = useState("");
+  const { addWagon } = useTrain();
 
-    useEffect(()=>{
-        const store = JSON.parse(sessionStorage.getItem("wagons") || "[]") as Wagon[];
-        setWagons(store)
-    },[])
-
-    function addWagon(type: string) {
-    if (type !== '') {
-        const wagon = newWagon(type);
-        const newWagons = [...wagons,wagon]
-        setWagons(newWagons);
-        sessionStorage.setItem("wagons", JSON.stringify(newWagons))
-        props.add()
-        props.exit()
-    } else {
-        console.log('Não pode')
+  function handleAdd() {
+    if (type === "") {
+      console.log("Não pode")
+      return
     }
-}
-
-
-    useEffect(()=>{
-        console.log('Wagons:',wagons)
-    },[wagons])
+    const wagon = newWagon(type)
+    addWagon(wagon)             
+    props.exit()
+  }
 
     return(
         <div className={styles.container}>
@@ -63,7 +49,7 @@ export default function AddWagonForm(props:FormWagon){
                     <button
                         className={styles.add}
                         id={type==''?styles.desable:''}
-                        onClick={()=>addWagon(type)}
+                        onClick={()=>handleAdd()}
                     >
                         Adicionar
                     </button>

@@ -25,8 +25,7 @@ export default function CardWagon(props:CardWagonProps){
             </button>
             {pupUpOn && 
                 <PopUpDelete 
-                    id={props.id} 
-                    confirm={()=>props.delete(props.id)} 
+                    id={props.id}
                     cancel={()=>setPopUpOn(false)}
                 />}
         </div>

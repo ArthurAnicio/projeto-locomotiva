@@ -1,29 +1,73 @@
-import React, { createContext, useContext, useState, useMemo, useCallback } from "react";
+"use client"
 
-interface Locomotive{
-    
-    id:number
-    weigthLimit:number
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useMemo,
+  useCallback,
+} from "react"
 
+export interface Wagon {
+  id: number;
+  type: "carga" | "passageiro" | "combustivel"
+  length: number
+  weight: number
 }
 
-export interface Wagon{
-
-    id:number
-    type: "carga" | "passageiro" | "combustivel"
-    length: number
-    weight: number
-
+interface TrainContextType {
+  wagons: Wagon[]
+  totalWeight: number
+  totalLength: number
+  addWagon: (wagon: Wagon) => void
+  removeWagon: (id: number) => void
+  clearWagons: () => void
 }
 
-interface Train{
+const TrainContext = createContext<TrainContextType | undefined>(undefined)
 
-    id:number
-    locomotive: Locomotive
-    wagons: Wagon[]
-    addWagon: (wagon:Wagon)=> void
-    removeWagon: (wagon:Wagon) => void
-    totalweigth: number
-    totalLength: number
+export function TrainProvider({ children }: { children: React.ReactNode }) {
+  
+  const [wagons, setWagons] = useState<Wagon[]>([])
 
+  const addWagon = useCallback((wagon: Wagon) => {
+    setWagons((prev) => [...prev, wagon])
+  }, [])
+
+  const removeWagon = useCallback((id: number) => {
+    setWagons((prev) => prev.filter((w) => w.id !== id))
+  }, [])
+
+  const clearWagons = useCallback(() => {
+    setWagons([])
+  }, [])
+
+  const totalWeight = useMemo(
+    () => wagons.reduce((acc, w) => acc + w.weight, 0),
+    [wagons]
+  )
+
+  const totalLength = useMemo(
+    () => wagons.reduce((acc, w) => acc + w.length, 0),
+    [wagons]
+  )
+
+  const value: TrainContextType = {
+    wagons,
+    totalWeight,
+    totalLength,
+    addWagon,
+    removeWagon,
+    clearWagons,
+  }
+
+  return (
+    <TrainContext.Provider value={value}>{children}</TrainContext.Provider>
+  )
+}
+
+export function useTrain() {
+  const ctx = useContext(TrainContext)
+  if (!ctx) throw new Error("useTrain deve estar dentro de TrainProvider")
+  return ctx
 }

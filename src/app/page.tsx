@@ -6,54 +6,26 @@ import AddWagonForm from "@/features/components/addWagonForm";
 import '../../public/locomotiva.svg'
 import { useState, useEffect } from "react";
 import { Wagon } from "../features/contexts/TrainContext";
-import { getTotal } from "@/features/utils/defineTotal";
+import { useTrain } from "../features/contexts/TrainContext";
 
 export default function Home() {
   
-  const[status, setStatus] = useState(0)
-  const[totalLength,setTotalLength] = useState(0)
-  const[totalWeight,setTotalWeight] = useState(0)
-  const[formOn,setFormOn] = useState(false)
-  const[wagons,setWagons] = useState<Wagon[]>([])
-  
-  useEffect(() => {
-    getWagons()
-  }, []);
+  const [status, setStatus] = useState(0)
+  const [formOn, setFormOn] = useState(false)
+
+  const { wagons, totalLength, totalWeight, removeWagon, clearWagons } =
+    useTrain()
 
   useEffect(() => {
-    sessionStorage.setItem("wagons", JSON.stringify(wagons))
-  }, [wagons])
-
-  useEffect(()=>{
-    const length = getTotal("length", wagons);
-    const weight = getTotal("weight", wagons);
-
-    setTotalLength(length);
-    setTotalWeight(weight);
-
-    if (weight >= 200 || wagons.length < 1) {
+    if (totalWeight >= 200 || wagons.length < 1) {
       setStatus(0)
-    }else{
-      if(status!==2){
-        setStatus(1)
-      }
+    } else {
+      setStatus((prev) => (prev === 2 ? 2 : 1))
     }
-  },[wagons,status])
+  }, [wagons, totalWeight])
 
-  function getWagons(){
-    const store = JSON.parse(sessionStorage.getItem("wagons") || "[]") as Wagon[]
-    setWagons(store)
-  }
-
-  function deleteWagon(id:number){
-    const newWagons = wagons.filter((wagon:Wagon)=>wagon.id !== id)
-    setWagons(newWagons)
-  }
-
-  function letLocomotive(){
-    if(status==1){
-      setStatus(2)
-    }
+  function letLocomotive() {
+    if (status === 1) setStatus(2)
   }
 
   return (
@@ -124,9 +96,7 @@ export default function Home() {
             </button>
             <button 
               className={styles.clean}
-              onClick={()=>{
-                setWagons([])
-              }}
+              onClick={()=>clearWagons()}
             >
               Limpar
             </button>
@@ -138,14 +108,13 @@ export default function Home() {
               id={wagon.id}      
               type={wagon.type}
               key={wagon.id}
-              delete={(e) => deleteWagon(e)}
+              delete={() => removeWagon(wagon.id)}
             />
           )}
         </div>
       </div>
       {formOn && 
         <AddWagonForm 
-          add={()=>getWagons()} 
           exit={()=>setFormOn(false)}
         />}
     </div>

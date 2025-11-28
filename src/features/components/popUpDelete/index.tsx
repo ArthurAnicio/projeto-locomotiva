@@ -1,12 +1,20 @@
 import styles from './popUp.module.css'
+import { useTrain } from '@/features/contexts/TrainContext'
 
 interface PopUpDeleteProps{
     id: number
-    confirm: (i:number)=>void
     cancel: ()=>void
 }
 
 export default function PopUpDelete(props:PopUpDeleteProps){
+
+    const { removeWagon } = useTrain();
+
+    function confirm(id:number){
+        removeWagon(id)
+        props.cancel()
+    }
+
     return(
         <div className={styles.background}>
             <div className={styles.popup}>
@@ -14,7 +22,7 @@ export default function PopUpDelete(props:PopUpDeleteProps){
                 <div className={styles.buttons}>
                     <button 
                         className={styles.confirm}
-                        onClick={()=>props.confirm(props.id)}
+                        onClick={()=>confirm(props.id)}
                     >
                         Confirmar
                     </button>
