@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import "./globals.css";
 import { Poppins } from "next/font/google";
+import { TrainProvider } from "@/features/contexts/TrainContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -24,7 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={poppins.variable}>
         <AppRouterCacheProvider>
-          {children}
+          <TrainProvider>{children}</TrainProvider>
         </AppRouterCacheProvider>
       </body>
     </html>

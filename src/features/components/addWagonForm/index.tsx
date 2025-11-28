@@ -1,23 +1,27 @@
-import { use, useEffect, useState } from 'react'
+"use client"
+import { useState } from 'react'
 import styles from './addWagon.module.css'
 import { newWagon } from '@/features/utils/defineWagon'
-import Image from "next/image";
-import { Wagon } from '@/features/classes/wagon';
+import { useTrain } from "@/features/contexts/TrainContext";
 import WagonOption from '../wagonOption';
 
 interface FormWagon{
-    exite: ()=>void
+    exit: ()=>void
 }
 
 export default function AddWagonForm(props:FormWagon){
 
-    const[wagons,setWagons] = useState<Wagon[]>([])
-    const [type,setType] = useState('')
+  const [type, setType] = useState("");
+  const { addWagon } = useTrain();
 
-    useEffect(()=>{
-        const store = JSON.parse(sessionStorage.getItem("wagons") || "[]") as Wagon[];
-        setWagons(store)
-    },[])
+  function handleAdd() {
+    if (type === "") {
+      return
+    }
+    const wagon = newWagon(type)
+    addWagon(wagon)             
+    props.exit()
+  }
 
     return(
         <div className={styles.container}>
@@ -41,7 +45,19 @@ export default function AddWagonForm(props:FormWagon){
                     />
                 </div>
                 <div className={styles.buttons}>
-                    {type}
+                    <button
+                        className={styles.add}
+                        id={type==''?styles.desable:''}
+                        onClick={()=>handleAdd()}
+                    >
+                        Adicionar
+                    </button>
+                    <button
+                        className={styles.cancel}
+                        onClick={()=>props.exit()}
+                    >
+                        Cancelar
+                    </button>
                 </div>
             </div>
         </div>

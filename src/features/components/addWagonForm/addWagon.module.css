@@ -1,5 +1,5 @@
 .container{
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     right: 0;
@@ -33,4 +33,50 @@
     display: flex;
     justify-content: space-around;
     width: 100%;
+}
+
+.buttons{
+    display: flex;
+    width: 100%;
+    margin-top: 150px;
+    justify-content: space-around;
+}
+
+.cancel,
+.add{
+    width: 300px;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    padding: 20px;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.cancel{
+    background: var(--red-p);
+}
+
+.add{
+    background: var(--blue-p);
+}
+
+.cancel:hover,.add:hover{
+    scale: 0.95;
+}
+
+.cancel:hover{
+    background: var(--red-t);
+}
+
+.add:hover{
+    background: var(--blue-t);
+}
+
+#desable{
+    cursor: not-allowed;
+    scale: 0.95;
+    background: var(--gray-p);
 }

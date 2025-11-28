@@ -13,15 +13,11 @@
 .option{
     box-shadow: 0 0 10px var(--black);
     cursor: pointer;
-    transition: 0.1s;
+    transition: 0.2s;
 }
 
-.optionSelected{
-    box-shadow: 5px 5px 0 var(--black);
-}
-
-.option:hover{
-    box-shadow: 5px 5px 0 var(--black);
+.optionSelected, .option:hover{
+    box-shadow: 8px 8px 0 var(--black);
 }
 
 .option,
