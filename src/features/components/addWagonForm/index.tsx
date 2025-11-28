@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import styles from './addWagon.module.css'
 import { newWagon } from '@/features/utils/defineWagon'
-import { useTrain, Wagon } from "@/features/contexts/TrainContext";
+import { useTrain } from "@/features/contexts/TrainContext";
 import WagonOption from '../wagonOption';
 
 interface FormWagon{
@@ -16,7 +16,6 @@ export default function AddWagonForm(props:FormWagon){
 
   function handleAdd() {
     if (type === "") {
-      console.log("Não pode")
       return
     }
     const wagon = newWagon(type)
