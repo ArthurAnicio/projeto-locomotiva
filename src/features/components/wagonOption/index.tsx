@@ -1,11 +1,11 @@
 import styles from './wagonOption.module.css'
 import WagonImage from '../wagonImage'
-import { useEffect, useState } from 'react'
+import { WagonType } from '@/features/contexts/TrainContext'
 
 interface WagonOptionProps{
-    type: string
+    type: WagonType
     actualType: string
-    selecionar: (e:string)=>void
+    selecionar: (salected:WagonType)=>void
 }
 
 export default function WagonOption(props:WagonOptionProps){

@@ -1,26 +1,36 @@
-import { Wagon } from "../classes/wagon"
+import { Wagon, WagonType } from "../contexts/TrainContext"
+import { v4 as uuidv4 } from "uuid";
 
-export function newWagon(type:string){
-    if(type=='carga'){
-        return new Wagon(
-            Math.random()*1000+1, 
-            type, 
-            12, 
-            30,
-        )
-    }else if(type=='passageiro'){
-        return new Wagon(
-            Math.random()*1000+1,
-            type,
-            15,
-            25, 
-        )
-    }else if(type=='combustivel'){
-        return new Wagon(
-            Math.random()*1000+1,
-            type,
-            16,
-            28,
-        )
+export function newWagon(type: WagonType): Wagon{
+
+    switch(type){
+        case 'carga':
+            return{
+                id: uuidv4(), 
+                type, 
+                length:12,
+                weight: 30,
+            }
+        case 'passageiro':
+            return {
+                id: uuidv4(),
+                type,
+                length:15,
+                weight: 25, 
+            }
+        case 'combustivel':
+            return {
+                id: uuidv4(),
+                type,
+                length:16,
+                weight: 28,
+            }
+        default:
+            return {
+                id: uuidv4(),
+                type,
+                length: 0,
+                weight: 0,
+            }
     }
 }
