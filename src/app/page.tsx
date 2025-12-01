@@ -7,26 +7,14 @@ import '../../public/locomotiva.svg'
 import { useState, useEffect } from "react";
 import { Wagon } from "../features/contexts/TrainContext";
 import { useTrain } from "../features/contexts/TrainContext";
+import { Status } from "@/features/contexts/TrainContext";
+import { release } from "os";
 
 export default function Home() {
   
-  const [status, setStatus] = useState(0)
   const [formOn, setFormOn] = useState(false)
-
-  const { wagons, totalLength, totalWeight, removeWagon, clearWagons } =
+  const { wagons, totalLength, totalWeight, status, clearWagons, releaseTrain } =
     useTrain()
-
-  useEffect(() => {
-    if (totalWeight >= 200 || wagons.length < 1) {
-      setStatus(0)
-    } else {
-      setStatus((prev) => (prev === 2 ? 2 : 1))
-    }
-  }, [wagons, totalWeight])
-
-  function letLocomotive() {
-    if (status === 1) setStatus(2)
-  }
 
   return (
     <div>
@@ -39,8 +27,8 @@ export default function Home() {
             />
             <button 
               className={styles.letButton}
-              id={status!=1?styles.disabled:''}
-              onClick={()=>letLocomotive()}
+              id={status!=Status.OK?styles.disabled:''}
+              onClick={()=>releaseTrain()}
             >
               Liberar
             </button>
@@ -66,21 +54,17 @@ export default function Home() {
           </p>
           <p
             style={{
-              border: status==1? 'solid 5px var(--green-p)':
-                      status==0?'solid 5px var(--red-s)':
+              border: status==Status.OK? 'solid 5px var(--green-p)':
+                      status== Status.NEGATIVO?'solid 5px var(--red-s)':
                       'solid 5px var(--blue-p)',
-              color: status==1? 'var(--green-p)':
-                     status==0?'var(--red-s)':
+              color: status==Status.OK? 'var(--green-p)':
+                     status==Status.NEGATIVO?'var(--red-s)':
                      'var(--blue-p)'
             }}
           >
             Satus: 
-            {status==1? 
-              <label className={styles.label}>Ok</label>
-            :status==0?   
-              <label className={styles.label}>Negativo</label>
-            : <label className={styles.label}>Liberada</label>
-            }
+           <label className={styles.label}>{status}</label>
+            
           </p>
         </div>
       </div>
@@ -108,7 +92,6 @@ export default function Home() {
               id={wagon.id}      
               type={wagon.type}
               key={wagon.id}
-              delete={() => removeWagon(wagon.id)}
             />
           )}
         </div>

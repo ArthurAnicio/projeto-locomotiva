@@ -1,12 +1,11 @@
 import styles from './CardWagon.module.css'
 import WagonImage from '../wagonImage';
 import { useState } from 'react';
-import PopUpDelete from '../popUpDelete';
+import ModalDeleteWagon from '../ModalDeleteWagon';
 
 interface CardWagonProps{
     id: string
     type: string
-    delete: (i:number)=>void
 }
 
 export default function CardWagon(props:CardWagonProps){
@@ -24,7 +23,7 @@ export default function CardWagon(props:CardWagonProps){
                 Remover
             </button>
             {pupUpOn && 
-                <PopUpDelete 
+                <ModalDeleteWagon
                     id={props.id}
                     cancel={()=>setPopUpOn(false)}
                 />}

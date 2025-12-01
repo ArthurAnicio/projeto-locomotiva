@@ -1,12 +1,12 @@
-import styles from './popUp.module.css'
+import styles from './modalDeleteWagon.module.css'
 import { useTrain } from '@/features/contexts/TrainContext'
 
-interface PopUpDeleteProps{
+interface ModalDeleteWagonProps{
     id: string
     cancel: ()=>void
 }
 
-export default function PopUpDelete(props:PopUpDeleteProps){
+export default function ModalDeleteWagon(props:ModalDeleteWagonProps){
 
     const { removeWagon } = useTrain();
 
@@ -18,7 +18,7 @@ export default function PopUpDelete(props:PopUpDeleteProps){
     return(
         <div className={styles.background}>
             <div className={styles.popup}>
-                <h2>Tem Certeza que deseja remover?</h2>
+                <h2>Tem certeza que deseja remover?</h2>
                 <div className={styles.buttons}>
                     <button 
                         className={styles.confirm}

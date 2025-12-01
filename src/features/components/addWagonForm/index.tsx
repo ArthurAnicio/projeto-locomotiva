@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import styles from './addWagon.module.css'
 import { newWagon } from '@/features/utils/defineWagon'
-import { useTrain } from "@/features/contexts/TrainContext";
+import { useTrain, WagonType } from "@/features/contexts/TrainContext";
 import WagonOption from '../wagonOption';
 
 interface FormWagon{
@@ -11,11 +11,11 @@ interface FormWagon{
 
 export default function AddWagonForm(props:FormWagon){
 
-  const [type, setType] = useState("");
+  const [type, setType] = useState<WagonType>(WagonType.None);
   const { addWagon } = useTrain();
 
   function handleAdd() {
-    if (type === "") {
+    if (type === WagonType.None) {
       return
     }
     const wagon = newWagon(type)
@@ -29,25 +29,25 @@ export default function AddWagonForm(props:FormWagon){
                 <h1>Adicionar um Vagão</h1>
                 <div className={styles.types}>
                     <WagonOption 
-                        type='carga' 
-                        selecionar={(e) => setType(e)} 
+                        type={WagonType.Carga} 
+                        selecionar={(selected) => setType(selected)} 
                         actualType={type}
                     />
                     <WagonOption 
-                        type='passageiro' 
-                        selecionar={(e) => setType(e)} 
+                        type={WagonType.Passageiro} 
+                        selecionar={(selected) => setType(selected)} 
                         actualType={type}
                     />
                     <WagonOption 
-                        type='combustivel' 
-                        selecionar={(e) => setType(e)} 
+                        type={WagonType.Combustivel}
+                        selecionar={(selected) => setType(selected)} 
                         actualType={type}
                     />
                 </div>
                 <div className={styles.buttons}>
                     <button
                         className={styles.add}
-                        id={type==''?styles.desable:''}
+                        id={type==WagonType.None?styles.desable:''}
                         onClick={()=>handleAdd()}
                     >
                         Adicionar
