@@ -1,9 +1,10 @@
 "use client"
 import { useState } from 'react'
-import styles from './addWagon.module.css'
+import { styles } from './AddWagon.styles'
 import { newWagon } from '@/features/utils/defineWagon'
 import { useTrain, WagonType } from "@/features/contexts/TrainContext";
 import WagonOption from '../wagonOption';
+import { Button, Box, Typography } from '@mui/material';
 
 interface FormWagon{
     exit: ()=>void
@@ -24,10 +25,10 @@ export default function AddWagonForm(props:FormWagon){
   }
 
     return(
-        <div className={styles.container}>
-            <div className={styles.form}>
-                <h1>Adicionar um Vagão</h1>
-                <div className={styles.types}>
+        <Box sx={styles.container}>
+            <Box sx={styles.form}>
+                <Typography sx={styles.title}>Adicionar um Vagão</Typography>
+                <Box sx={styles.types}>
                     <WagonOption 
                         type={WagonType.Carga} 
                         selecionar={(selected) => setType(selected)} 
@@ -43,23 +44,22 @@ export default function AddWagonForm(props:FormWagon){
                         selecionar={(selected) => setType(selected)} 
                         actualType={type}
                     />
-                </div>
-                <div className={styles.buttons}>
-                    <button
-                        className={styles.add}
-                        id={type==WagonType.None?styles.desable:''}
+                </Box>
+                <Box sx={styles.buttons}>
+                    <Button
+                        sx={type==WagonType.None?styles.addDisabled:styles.add}
                         onClick={()=>handleAdd()}
                     >
                         Adicionar
-                    </button>
-                    <button
-                        className={styles.cancel}
+                    </Button>
+                    <Button
+                        sx={styles.cancel}
                         onClick={()=>props.exit()}
                     >
                         Cancelar
-                    </button>
-                </div>
-            </div>
-        </div>
+                    </Button>
+                </Box>
+            </Box>
+        </Box>
     )
 }

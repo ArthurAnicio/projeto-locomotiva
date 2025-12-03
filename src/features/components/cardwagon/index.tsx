@@ -1,7 +1,8 @@
-import styles from './CardWagon.module.css'
+import { styles } from './CardWagon.styles'
 import WagonImage from '../wagonImage';
 import { useState } from 'react';
 import ModalDeleteWagon from '../ModalDeleteWagon';
+import { Button, Box, Typography } from '@mui/material';
 
 interface CardWagonProps{
     id: string
@@ -13,20 +14,21 @@ export default function CardWagon(props:CardWagonProps){
     const [pupUpOn,setPopUpOn] = useState(false)
 
     return(
-        <div className={styles.card}>
-            <h2>{props.type}</h2>
+        <Box sx={styles.card}>
+            <Typography sx={styles.title}>{props.type}</Typography>
             <WagonImage type={props.type} width={80} heigth={80} />
-            <button 
-                className={styles.remover}
+            <Button 
+                sx={styles.remover}
                 onClick={()=>setPopUpOn(true)}
             >  
                 Remover
-            </button>
+            </Button>
             {pupUpOn && 
                 <ModalDeleteWagon
                     id={props.id}
                     cancel={()=>setPopUpOn(false)}
-                />}
-        </div>
+                />
+            }
+        </Box>
     )
 }
