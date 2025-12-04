@@ -1,5 +1,5 @@
 import { styles } from './CardWagon.styles'
-import WagonImage from '../wagonImage';
+import WagonImage from '../WagonImage';
 import { useState } from 'react';
 import ModalDeleteWagon from '../ModalDeleteWagon';
 import { Button, Box, Typography } from '@mui/material';

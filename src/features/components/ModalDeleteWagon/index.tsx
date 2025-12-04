@@ -1,4 +1,4 @@
-import {styles} from './ModalDeleteWagon.styles'
+import { styles } from './ModalDeleteWagon.styles'
 import { useTrain } from '@/features/contexts/TrainContext'
 import { Button, Box, Typography } from '@mui/material'
 

@@ -1,8 +1,8 @@
 "use client"
 import Image from "next/image";
 import { styles } from "./page.styles";
-import CardWagon from "@/features/components/cardwagon";
-import AddWagonForm from "@/features/components/addWagonForm";
+import CardWagon from "@/features/components/Cardwagon";
+import AddWagonForm from "@/features/components/AddWagonForm";
 import '../../public/locomotiva.svg'
 import { useState } from "react";
 import { Wagon } from "../features/contexts/TrainContext";
