@@ -1,6 +1,7 @@
-import styles from './wagonOption.module.css'
+import { styles } from './WagonOption.styles'
 import WagonImage from '../wagonImage'
 import { WagonType } from '@/features/contexts/TrainContext'
+import { Box, Typography } from '@mui/material'
 
 interface WagonOptionProps{
     type: WagonType
@@ -11,12 +12,12 @@ interface WagonOptionProps{
 export default function WagonOption(props:WagonOptionProps){
 
     return(
-        <div 
-            className={props.type==props.actualType?styles.optionSelected:styles.option}
+        <Box 
+            sx={props.type==props.actualType?styles.optionSelected:styles.option}
             onClick={()=>props.selecionar(props.type)}
         >
             <WagonImage type={props.type} width={100} heigth={160}/>
-            <h2>{props.type}</h2>   
-        </div>
+            <Typography sx={styles.title}>{props.type}</Typography>   
+        </Box>
     )
 }

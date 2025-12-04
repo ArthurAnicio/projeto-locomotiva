@@ -1,5 +1,6 @@
-import styles from './modalDeleteWagon.module.css'
+import {styles} from './ModalDeleteWagon.styles'
 import { useTrain } from '@/features/contexts/TrainContext'
+import { Button, Box, Typography } from '@mui/material'
 
 interface ModalDeleteWagonProps{
     id: string
@@ -16,24 +17,24 @@ export default function ModalDeleteWagon(props:ModalDeleteWagonProps){
     }
 
     return(
-        <div className={styles.background}>
-            <div className={styles.popup}>
-                <h2>Tem certeza que deseja remover?</h2>
-                <div className={styles.buttons}>
-                    <button 
-                        className={styles.confirm}
+        <Box sx={styles.background}>
+            <Box sx={styles.popup}>
+                <Typography sx={styles.title}>Tem certeza que deseja remover?</Typography>
+                <Box sx={styles.buttons}>
+                    <Button 
+                        sx={styles.confirm}
                         onClick={()=>confirm(props.id)}
                     >
                         Confirmar
-                    </button>
-                    <button 
-                        className={styles.cancel}
+                    </Button>
+                    <Button 
+                        sx={styles.cancel}
                         onClick={()=>props.cancel()}
                     >
                         Cancelar
-                    </button>
-                </div>
-            </div>
-        </div>
+                    </Button>
+                </Box>
+            </Box>
+        </Box>
     )
 }
