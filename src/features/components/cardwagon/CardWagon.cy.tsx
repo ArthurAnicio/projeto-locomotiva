@@ -1,0 +1,1 @@
+import CardWagon from "@/features/components/cardwagon";

@@ -1,0 +1,1 @@
+import ModalDeleteWagon from "@/features/components/ModalDeleteWagon";

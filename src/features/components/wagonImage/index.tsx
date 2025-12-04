@@ -11,7 +11,13 @@ export default function WagonImage(props:WagonImageProps){
     const image = props.type == "carga"? 'vagaoCarga.svg':
                   props.type == "passageiro"? 'vagaoTransporte.svg':
                   props.type == "combustivel" ? 'vagaoCombustivel.svg':
-                  null
+                  'none.svg';
 
-    return <Image src={`/${image}`} alt={props.type} width={props.width} height={props.heigth}/>
+    return <Image 
+                src={`/${image}`} 
+                alt={props.type} 
+                width={props.width} 
+                height={props.heigth}
+                data-cy="wagon-image"
+            />
 }
