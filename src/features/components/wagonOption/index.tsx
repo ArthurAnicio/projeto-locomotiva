@@ -1,7 +1,7 @@
-import { styles } from './WagonOption.styles'
 import WagonImage from '../wagonImage'
 import { WagonType } from '@/features/contexts/TrainContext'
 import { Box, Typography } from '@mui/material'
+import { styles } from './WagonOption.styles'
 
 interface WagonOptionProps{
     type: WagonType
@@ -9,7 +9,7 @@ interface WagonOptionProps{
     selecionar: (salected:WagonType)=>void
 }
 
-export default function WagonOption(props:WagonOptionProps){
+export const WagonOption = (props:WagonOptionProps) => {
 
     return(
         <Box 

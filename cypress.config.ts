@@ -6,7 +6,8 @@ export default defineConfig({
       framework: 'next',
       bundler: 'webpack'
     },
-    specPattern: 'src/**/*.cy.{js,jsx,ts,tsx}',
+   specPattern: 'src/**/*.cy.{js,jsx,ts,tsx}', 
+    excludeSpecPattern: ['src/pages/**/*'],
     video: false,
     viewportHeight: 880,
     viewportWidth: 1366,

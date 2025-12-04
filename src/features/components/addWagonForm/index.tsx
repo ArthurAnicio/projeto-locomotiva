@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { styles } from './AddWagon.styles'
 import { newWagon } from '@/features/utils/defineWagon'
 import { useTrain, WagonType } from "@/features/contexts/TrainContext";
-import WagonOption from '../wagonOption';
+import {WagonOption} from '../WagonOption';
 import { Button, Box, Typography } from '@mui/material';
 
 interface FormWagon{

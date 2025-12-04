@@ -1,7 +1,7 @@
-import WagonOption from "@/features/components/wagonOption";
 import { TrainProvider, WagonType } from "@/features/contexts/TrainContext";
+import { WagonOption } from ".";
 
-describe("<WagonOption />", () => {
+describe("WagonOption", () => {
   it.only("renderiza a imagem e o título", () => {
     const onSelect = cy.stub();
 
