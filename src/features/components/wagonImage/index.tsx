@@ -1,17 +1,22 @@
 import Image from "next/image";
+import { WagonType } from "@/features/contexts/TrainContext";
+import { validateType }from "@/features/utils/validateImage";
 
 interface WagonImageProps{
-    type:string
+    type: WagonType,
     width:number
     heigth:number
 }
 
 export default function WagonImage(props:WagonImageProps){
 
-    const image = props.type == "carga"? 'vagaoCarga.svg':
-                  props.type == "passageiro"? 'vagaoTransporte.svg':
-                  props.type == "combustivel" ? 'vagaoCombustivel.svg':
-                  null
+    const image = validateType(props.type);
 
-    return <Image src={`/${image}`} alt={props.type} width={props.width} height={props.heigth}/>
+    return <Image 
+                src={`/${image}`} 
+                alt={props.type} 
+                width={props.width} 
+                height={props.heigth}
+                data-cy="wagon-image"
+            />
 }

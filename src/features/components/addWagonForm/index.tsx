@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { styles } from './AddWagon.styles'
 import { newWagon } from '@/features/utils/defineWagon'
 import { useTrain, WagonType } from "@/features/contexts/TrainContext";
-import WagonOption from '../wagonOption';
+import { WagonOption } from '../WagonOption';
 import { Button, Box, Typography } from '@mui/material';
 
 interface FormWagon{
@@ -12,17 +12,25 @@ interface FormWagon{
 
 export default function AddWagonForm(props:FormWagon){
 
-  const [type, setType] = useState<WagonType>(WagonType.None);
-  const { addWagon } = useTrain();
+    const [type, setType] = useState<WagonType>(WagonType.None);
+    const { addWagon } = useTrain();
 
-  function handleAdd() {
+    function handleAdd() {
     if (type === WagonType.None) {
-      return
+        return
     }
     const wagon = newWagon(type)
     addWagon(wagon)             
     props.exit()
-  }
+    }
+
+    function handleDisable(type:WagonType){
+        if (type==WagonType.None){
+            return styles.addDisabled
+        }else{
+            return styles.add
+        }
+    }
 
     return(
         <Box sx={styles.container}>
@@ -47,7 +55,7 @@ export default function AddWagonForm(props:FormWagon){
                 </Box>
                 <Box sx={styles.buttons}>
                     <Button
-                        sx={type==WagonType.None?styles.addDisabled:styles.add}
+                        sx={handleDisable(type)}
                         onClick={()=>handleAdd()}
                     >
                         Adicionar
