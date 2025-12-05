@@ -1,22 +1,31 @@
-import styles from './wagonOption.module.css'
-import WagonImage from '../wagonImage'
-import { useEffect, useState } from 'react'
+import WagonImage from '../WagonImage'
+import { WagonType } from '@/features/contexts/TrainContext'
+import { Box, Typography } from '@mui/material'
+import { styles } from './WagonOption.styles'
 
 interface WagonOptionProps{
-    type: string
-    actualType: string
-    selecionar: (e:string)=>void
+    type: WagonType
+    actualType: WagonType
+    selecionar: (salected:WagonType)=>void
 }
 
-export default function WagonOption(props:WagonOptionProps){
+export const WagonOption = (props:WagonOptionProps) => {
+
+    function selectStyle(type:WagonType){
+        if(type==props.actualType){
+            return styles.optionSelected
+        }else{
+            return styles.option
+        }
+    }
 
     return(
-        <div 
-            className={props.type==props.actualType?styles.optionSelected:styles.option}
+        <Box 
+            sx={selectStyle(props.type)}
             onClick={()=>props.selecionar(props.type)}
         >
             <WagonImage type={props.type} width={100} heigth={160}/>
-            <h2>{props.type}</h2>   
-        </div>
+            <Typography sx={styles.title}>{props.type}</Typography>   
+        </Box>
     )
 }

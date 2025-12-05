@@ -1,49 +1,73 @@
-import { use, useEffect, useState } from 'react'
-import styles from './addWagon.module.css'
+"use client"
+import { useState } from 'react'
+import { styles } from './AddWagon.styles'
 import { newWagon } from '@/features/utils/defineWagon'
-import Image from "next/image";
-import { Wagon } from '@/features/classes/wagon';
-import WagonOption from '../wagonOption';
+import { useTrain, WagonType } from "@/features/contexts/TrainContext";
+import { WagonOption } from '../WagonOption';
+import { Button, Box, Typography } from '@mui/material';
 
 interface FormWagon{
-    exite: ()=>void
+    exit: ()=>void
 }
 
 export default function AddWagonForm(props:FormWagon){
 
-    const[wagons,setWagons] = useState<Wagon[]>([])
-    const [type,setType] = useState('')
+    const [type, setType] = useState<WagonType>(WagonType.None);
+    const { addWagon } = useTrain();
 
-    useEffect(()=>{
-        const store = JSON.parse(sessionStorage.getItem("wagons") || "[]") as Wagon[];
-        setWagons(store)
-    },[])
+    function handleAdd() {
+    if (type === WagonType.None) {
+        return
+    }
+    const wagon = newWagon(type)
+    addWagon(wagon)             
+    props.exit()
+    }
+
+    function handleDisable(type:WagonType){
+        if (type==WagonType.None){
+            return styles.addDisabled
+        }else{
+            return styles.add
+        }
+    }
 
     return(
-        <div className={styles.container}>
-            <div className={styles.form}>
-                <h1>Adicionar um Vagão</h1>
-                <div className={styles.types}>
+        <Box sx={styles.container}>
+            <Box sx={styles.form}>
+                <Typography sx={styles.title}>Adicionar um Vagão</Typography>
+                <Box sx={styles.types}>
                     <WagonOption 
-                        type='carga' 
-                        selecionar={(e) => setType(e)} 
+                        type={WagonType.Carga} 
+                        selecionar={(selected) => setType(selected)} 
                         actualType={type}
                     />
                     <WagonOption 
-                        type='passageiro' 
-                        selecionar={(e) => setType(e)} 
+                        type={WagonType.Passageiro} 
+                        selecionar={(selected) => setType(selected)} 
                         actualType={type}
                     />
                     <WagonOption 
-                        type='combustivel' 
-                        selecionar={(e) => setType(e)} 
+                        type={WagonType.Combustivel}
+                        selecionar={(selected) => setType(selected)} 
                         actualType={type}
                     />
-                </div>
-                <div className={styles.buttons}>
-                    {type}
-                </div>
-            </div>
-        </div>
+                </Box>
+                <Box sx={styles.buttons}>
+                    <Button
+                        sx={handleDisable(type)}
+                        onClick={()=>handleAdd()}
+                    >
+                        Adicionar
+                    </Button>
+                    <Button
+                        sx={styles.cancel}
+                        onClick={()=>props.exit()}
+                    >
+                        Cancelar
+                    </Button>
+                </Box>
+            </Box>
+        </Box>
     )
 }

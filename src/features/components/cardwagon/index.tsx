@@ -1,19 +1,35 @@
-import styles from './CardWagon.module.css'
-import Image from "next/image";
-import WagonImage from '../wagonImage';
+import { styles } from './CardWagon.styles'
+import WagonImage from '../WagonImage';
+import { useState } from 'react';
+import ModalDeleteWagon from '../ModalDeleteWagon';
+import { Button, Box, Typography } from '@mui/material';
+import { WagonType } from '@/features/contexts/TrainContext';
 
 interface CardWagonProps{
-    type: string
-    delete: ()=>void
+    id: string
+    type: WagonType
 }
 
 export default function CardWagon(props:CardWagonProps){
     
+    const [pupUpOn,setPopUpOn] = useState(false)
+
     return(
-        <div className={styles.card}>
-            <h2>{props.type}</h2>
+        <Box sx={styles.card}>
+            <Typography sx={styles.title}>{props.type}</Typography>
             <WagonImage type={props.type} width={80} heigth={80} />
-            <button className={styles.remover}>Remover</button>
-        </div>
+            <Button 
+                sx={styles.remover}
+                onClick={()=>setPopUpOn(true)}
+            >  
+                Remover
+            </Button>
+            {pupUpOn && 
+                <ModalDeleteWagon
+                    id={props.id}
+                    cancel={()=>setPopUpOn(false)}
+                />
+            }
+        </Box>
     )
 }
