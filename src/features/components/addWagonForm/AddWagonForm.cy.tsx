@@ -1,7 +1,7 @@
 import AddWagonForm from "@/features/components/AddWagonForm";
-import { TrainProvider, useTrain, WagonType } from "@/features/contexts/TrainContext";
+import { TrainProvider, WagonType } from "@/features/contexts/TrainContext";
 
-describe("<AddWagonForm />", () => {
+describe("AddWagonForm", () => {
   const mountWithProvider = (exitSpy?: Cypress.Agent<sinon.SinonSpy>) => {
     const onExit = exitSpy ?? cy.stub().as("onExit");
 
@@ -14,7 +14,7 @@ describe("<AddWagonForm />", () => {
     return onExit;
   };
 
-  it("renderiza o título e as opções de vagão", () => {
+  it("Should render the title and wagon options", () => {
     mountWithProvider();
 
     cy.contains("Adicionar um Vagão").should("be.visible");
@@ -23,7 +23,7 @@ describe("<AddWagonForm />", () => {
     cy.contains(WagonType.Combustivel).should("be.visible");
   });
 
-  it("não adiciona vagão quando nenhum tipo está selecionado", () => {
+  it("Should not add a wagon when no type has been selected.", () => {
     const onExit = mountWithProvider();
 
     cy.contains("Adicionar").click();
@@ -31,7 +31,7 @@ describe("<AddWagonForm />", () => {
     cy.get("@onExit").should("not.have.been.called");
   });
 
-  it("chama exit quando um tipo é selecionado e clica em Adicionar", () => {
+  it("Should call 'exit' function when a type has been selected and 'Adicionar' button is clicked", () => {
     const onExit = cy.stub().as("onExit");
 
     cy.mount(

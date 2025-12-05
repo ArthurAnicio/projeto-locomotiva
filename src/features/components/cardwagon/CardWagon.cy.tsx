@@ -1,21 +1,16 @@
 import CardWagon from "@/features/components/Cardwagon";
-import { TrainProvider } from "@/features/contexts/TrainContext";
+import { TrainProvider, WagonType } from "@/features/contexts/TrainContext";
 
-describe("<CardWagon />", () => {
-  const render = (props?: Partial<React.ComponentProps<typeof CardWagon>>) => {
-    const defaultProps = {
-      id: "123",
-      type: "carga",
-    };
-
+describe("CardWagon", () => {
+  const render = () => {
     cy.mount(
       <TrainProvider>
-        <CardWagon {...defaultProps} {...props} />
+        <CardWagon id="123" type={WagonType.Carga} />
       </TrainProvider>
     );
   };
 
-  it("renderiza título, imagem e botão remover", () => {
+  it("Should render the title, image and remove button", () => {
     render();
 
     cy.contains("carga").should("be.visible");
@@ -23,7 +18,7 @@ describe("<CardWagon />", () => {
     cy.contains("Remover").should("be.visible");
   });
 
-  it("abre o modal ao clicar em Remover", () => {
+  it("Should open the modal when 'Remover' button is clicked", () => {
     render();
 
     cy.contains("Remover").click();
@@ -31,7 +26,7 @@ describe("<CardWagon />", () => {
     cy.contains("Tem certeza que deseja remover?").should("be.visible");
   });
 
-  it("fecha o modal ao clicar em Cancelar", () => {
+  it("Should close the modal when 'Cancelar' button is clicked", () => {
     render();
 
     cy.contains("Remover").click();

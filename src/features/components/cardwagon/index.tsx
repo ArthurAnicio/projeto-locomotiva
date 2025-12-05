@@ -3,10 +3,11 @@ import WagonImage from '../WagonImage';
 import { useState } from 'react';
 import ModalDeleteWagon from '../ModalDeleteWagon';
 import { Button, Box, Typography } from '@mui/material';
+import { WagonType } from '@/features/contexts/TrainContext';
 
 interface CardWagonProps{
     id: string
-    type: string
+    type: WagonType
 }
 
 export default function CardWagon(props:CardWagonProps){

@@ -5,15 +5,23 @@ import { styles } from './WagonOption.styles'
 
 interface WagonOptionProps{
     type: WagonType
-    actualType: string
+    actualType: WagonType
     selecionar: (salected:WagonType)=>void
 }
 
 export const WagonOption = (props:WagonOptionProps) => {
 
+    function selectStyle(type:WagonType){
+        if(type==props.actualType){
+            return styles.optionSelected
+        }else{
+            return styles.option
+        }
+    }
+
     return(
         <Box 
-            sx={props.type==props.actualType?styles.optionSelected:styles.option}
+            sx={selectStyle(props.type)}
             onClick={()=>props.selecionar(props.type)}
         >
             <WagonImage type={props.type} width={100} heigth={160}/>

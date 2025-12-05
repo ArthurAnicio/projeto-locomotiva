@@ -10,8 +10,8 @@ const Wrapper: React.FC<{ id: string; onCancel: () => void }> = ({
   </TrainProvider>
 );
 
-describe("<ModalDeleteWagon />", () => {
-  it("mostra o texto e os botões", () => {
+describe("ModalDeleteWagon", () => {
+  it("Should render the text and the buttons", () => {
     const onCancel = cy.stub();
 
     cy.mount(<Wrapper id="123" onCancel={onCancel} />);
@@ -21,7 +21,7 @@ describe("<ModalDeleteWagon />", () => {
     cy.contains("Cancelar").should("be.visible");
   });
 
-  it("chama cancel ao clicar em Cancelar", () => {
+  it("Should call 'cacel' function when 'Cancelar' button is clicked", () => {
     const onCancel = cy.stub().as("onCancel");
 
     cy.mount(<Wrapper id="123" onCancel={onCancel} />);
@@ -31,7 +31,7 @@ describe("<ModalDeleteWagon />", () => {
     cy.get("@onCancel").should("have.been.calledOnce");
   });
 
-  it("remove o vagão e chama cancel ao clicar em Confirmar", () => {
+  it("Should remove the wagon and call 'cancel' function when 'Confirmar' button is clicked", () => {
     const onCancel = cy.stub().as("onCancel");
 
     const TestComponent = () => {
