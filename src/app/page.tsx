@@ -2,7 +2,7 @@
 import { styles } from "./page.styles";
 import { useEffect, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
-import { NewDriverModal } from "@/features/Driver/components/NewDriverModal";
+import { NewDriverModal } from "@/features/Driver/NewDriverModal";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
