@@ -3,9 +3,9 @@ import Image from "next/image";
 import { styles } from "./TrainPage.styles";
 import CardWagon from "@/features/Train/components/Cardwagon";
 import AddWagonForm from "@/features/Train/components/AddWagonForm";
-import '../../../../public/locomotiva.svg'
+import '../../../public/locomotiva.svg'
 import { useEffect, useState } from "react";
-import { Wagon,Status,useTrain } from "../../../features/Train/contexts/TrainContext";
+import { Wagon,Status,useTrain } from "../../features/Train/contexts/TrainContext";
 import { Box, Button, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 

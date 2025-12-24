@@ -20,6 +20,7 @@
   --purple-s: #340580;
 
   --black-blank: #00000080;
+  --font-poppins: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 html,
