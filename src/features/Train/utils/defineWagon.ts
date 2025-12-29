@@ -1,5 +1,5 @@
-import { Wagon, WagonType } from "../contexts/TrainContext"
 import { v4 as uuidv4 } from "uuid";
+import { WagonType, Wagon } from "../types";
 
 export function newWagon(type: WagonType): Wagon{
 

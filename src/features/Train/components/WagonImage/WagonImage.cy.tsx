@@ -1,5 +1,5 @@
 import WagonImage from "@/features/Train/components/WagonImage";
-import { WagonType } from "@/features/contexts/TrainContext";
+import { WagonType } from "../../types";
 
 describe("WagonImage", () => {
   

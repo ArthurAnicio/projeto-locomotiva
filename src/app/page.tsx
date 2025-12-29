@@ -34,7 +34,7 @@ export default function Home() {
           Novo Maquinista
         </Button>
       </Box>
-      {modalOn&&<NewDriverModal close={()=>setModalOn(false)}/>}
+      {modalOn&&<NewDriverModal onClose={()=>setModalOn(false)}/>}
     </Box>
   );
 }
