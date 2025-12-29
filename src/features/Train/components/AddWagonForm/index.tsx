@@ -36,7 +36,9 @@ export default function AddWagonForm(props:FormWagon){
     return(
         <Box sx={styles.container}>
             <Box sx={styles.form}>
-                <Typography sx={styles.title}>Adicionar um Vagão</Typography>
+                <Typography sx={styles.title} data-testid="add-wagon-title">
+                    Adicionar um Vagão
+                </Typography>
                 <Box sx={styles.types}>
                     <WagonOption 
                         type={WagonType.Carga} 
@@ -58,10 +60,12 @@ export default function AddWagonForm(props:FormWagon){
                     <Button
                         sx={handleDisable(type)}
                         onClick={()=>handleAdd()}
+                        data-testid="add-wagon-button"
                     >
                         Adicionar
                     </Button>
                     <Button
+                        data-testid="cancel-wagon-button"
                         sx={styles.cancel}
                         onClick={()=>props.exit()}
                     >
