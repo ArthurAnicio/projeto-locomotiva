@@ -1,6 +1,6 @@
-import { DriverFormValues } from "./types";
+import { Driver } from "./types";
 
-export const initialValues: DriverFormValues = {
+export const initialValues: Driver = {
   fullName: "",
   email: "",
   chf: "",

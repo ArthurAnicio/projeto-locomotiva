@@ -1,8 +1,9 @@
 export interface NewDriverModalProps {
   onClose: () => void;
+  onSubmit: (newDriver: Driver) => void
 }
 
-export interface DriverFormValues {
+export interface Driver{
   fullName: string;
   email: string;
   chf: string;

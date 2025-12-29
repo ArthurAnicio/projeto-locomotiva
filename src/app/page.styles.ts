@@ -40,7 +40,7 @@ export const styles: Record<string, SxProps<Theme>> = {
       transform: "scale(0.95)",
     },
   },
-  signUpButton: {
+  drivers: {
     width: '300px',
     margin: '20px 0',
     padding: '10px',

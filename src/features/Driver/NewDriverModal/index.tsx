@@ -13,15 +13,21 @@ import EmailIcon from "@mui/icons-material/Email";
 import CloseIcon from "@mui/icons-material/Close";
 import { useFormik } from "formik";
 import { driverSchema } from "@/features/Driver/driverSchema";
-import { NewDriverModalProps } from "../types";
+import { NewDriverModalProps, Driver } from "../types";
 import { initialValues } from "../constants";
 
-export function NewDriverModal({ onClose }: NewDriverModalProps) {
+export function NewDriverModal({ onClose, onSubmit }: NewDriverModalProps) {
   const formik = useFormik({
     initialValues,
     validationSchema: driverSchema,
-    onSubmit: (values, { setSubmitting, resetForm }) => {
-      alert(`Maquinista cadastrado:\n${JSON.stringify(values, null, 2)}`);
+    onSubmit: (values: Driver, { setSubmitting, resetForm }) => {
+      if (onSubmit) {
+        onSubmit(values);
+      } else {
+        console.log("Novo maquinista:", values);
+        alert(`Maquinista cadastrado:\n${JSON.stringify(values, null, 2)}`);
+      }
+      
       setSubmitting(false);
       resetForm();
       onClose();

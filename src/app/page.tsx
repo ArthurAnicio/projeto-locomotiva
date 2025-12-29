@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 export default function Home() {
 
   const router = useRouter()
-  const [modalOn,setModalOn]=useState(false)
 
   useEffect(()=>{
     localStorage.setItem("loggado","")
@@ -28,13 +27,12 @@ export default function Home() {
           Criar Locomotiva
         </Button>
         <Button
-          onClick={()=>setModalOn(true)}
-          sx={styles.signUpButton}
+          onClick={()=>router.push('/DriversPage')}
+          sx={styles.drivers}
         >
-          Novo Maquinista
+          Maquinistas
         </Button>
       </Box>
-      {modalOn&&<NewDriverModal onClose={()=>setModalOn(false)}/>}
     </Box>
   );
 }
