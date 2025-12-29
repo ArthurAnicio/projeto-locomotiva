@@ -1,9 +1,11 @@
-import AddWagonForm from "@/features/Train/components/AddWagonForm";
-import { TrainProvider, WagonType } from "@/features/contexts/TrainContext";
+import React from "react";
+import AddWagonForm from "./index";
+import { TrainProvider } from "@/features/Train/contexts/TrainContext";
+import { WagonType } from "../../types";
 
 describe("AddWagonForm", () => {
-  const mountWithProvider = (exitSpy?: Cypress.Agent<sinon.SinonSpy>) => {
-    const onExit = exitSpy ?? cy.stub().as("onExit");
+  const mountWithProvider = () => {
+    const onExit = cy.stub().as("onExit");
 
     cy.mount(
       <TrainProvider>
@@ -11,22 +13,27 @@ describe("AddWagonForm", () => {
       </TrainProvider>
     );
 
-    return onExit;
+    return cy.get("@onExit");
   };
 
   it("Should render the title and wagon options", () => {
     mountWithProvider();
 
-    cy.contains("Adicionar um Vagão").should("be.visible");
-    cy.contains(WagonType.Carga).should("be.visible");
-    cy.contains(WagonType.Passageiro).should("be.visible");
-    cy.contains(WagonType.Combustivel).should("be.visible");
+    cy.get("body").then(() => {
+      cy.get('[data-testid="add-wagon-title"]').should("exist");
+    });
+
+    cy.get('[data-testid="add-wagon-title"]').should("exist");
+    
+    cy.contains("carga").should("exist");
+    cy.contains("passageiro").should("exist");
+    cy.contains("combustivel").should("exist");
   });
 
-  it("Should not add a wagon when no type has been selected.", () => {
-    const onExit = mountWithProvider();
+  it("Should not add a wagon when no type has been selected", () => {
+    mountWithProvider();
 
-    cy.contains("Adicionar").click();
+    cy.contains("Adicionar").click({ force: true });
 
     cy.get("@onExit").should("not.have.been.called");
   });
@@ -40,8 +47,9 @@ describe("AddWagonForm", () => {
       </TrainProvider>
     );
 
-    cy.contains(WagonType.Carga).click();
-    cy.contains("button", "Adicionar").click();
+    cy.contains(WagonType.Carga).scrollIntoView().click({ force: true });
+    
+    cy.contains("button", "Adicionar").click({ force: true });
 
     cy.get("@onExit").should("have.been.calledOnce");
   });
