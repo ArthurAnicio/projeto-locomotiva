@@ -2,9 +2,10 @@
 import { useState } from 'react'
 import { styles } from './AddWagon.styles'
 import { newWagon } from '@/features/Train/utils/defineWagon'
-import { useTrain, WagonType } from "@/features/Train/contexts/TrainContext";
+import { useTrain,} from "@/features/Train/contexts/TrainContext";
 import { WagonOption } from '../WagonOption';
 import { Button, Box, Typography } from '@mui/material';
+import { WagonType } from '../../types';
 
 interface FormWagon{
     exit: ()=>void

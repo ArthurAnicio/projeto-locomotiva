@@ -1,5 +1,6 @@
 import CardWagon from "@/features/Train/components/Cardwagon";
-import { TrainProvider, WagonType } from "@/features/contexts/TrainContext";
+import { TrainProvider} from "@/features/Train/contexts/TrainContext";
+import { WagonType } from "../../types";
 
 describe("CardWagon", () => {
   const render = () => {

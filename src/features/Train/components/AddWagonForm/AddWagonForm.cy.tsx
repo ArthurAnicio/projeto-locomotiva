@@ -1,5 +1,6 @@
 import AddWagonForm from "@/features/Train/components/AddWagonForm";
-import { TrainProvider, WagonType } from "@/features/contexts/TrainContext";
+import { TrainProvider} from "@/features/Train/contexts/TrainContext";
+import { WagonType } from "../../types";
 
 describe("AddWagonForm", () => {
   const mountWithProvider = (exitSpy?: Cypress.Agent<sinon.SinonSpy>) => {

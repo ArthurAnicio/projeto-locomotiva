@@ -3,7 +3,7 @@ import WagonImage from '../WagonImage';
 import { useState } from 'react';
 import ModalDeleteWagon from '../ModalDeleteWagon';
 import { Button, Box, Typography } from '@mui/material';
-import { WagonType } from '@/features/Train/contexts/TrainContext';
+import { WagonType } from '@/features/Train/types';
 
 interface CardWagonProps{
     id: string

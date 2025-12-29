@@ -1,4 +1,4 @@
-import { WagonType } from "../contexts/TrainContext";
+import { WagonType } from "../types";
 
 export function validateType(type:WagonType){
     switch(type){

@@ -1,5 +1,5 @@
 import WagonImage from '../WagonImage'
-import { WagonType } from '@/features/Train/contexts/TrainContext'
+import { WagonType } from '@/features/Train/types'
 import { Box, Typography } from '@mui/material'
 import { styles } from './WagonOption.styles'
 

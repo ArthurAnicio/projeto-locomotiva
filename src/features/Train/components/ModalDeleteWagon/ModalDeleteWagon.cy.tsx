@@ -1,5 +1,6 @@
 import ModalDeleteWagon from "@/features/Train/components/ModalDeleteWagon";
-import { TrainProvider, useTrain , WagonType } from "@/features/contexts/TrainContext";
+import { TrainProvider, useTrain } from "@/features/Train/contexts/TrainContext";
+import { WagonType } from "../../types";
 
 const Wrapper: React.FC<{ id: string; onCancel: () => void }> = ({
   id,

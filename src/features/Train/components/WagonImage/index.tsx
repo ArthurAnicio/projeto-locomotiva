@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { WagonType } from "@/features/Train/contexts/TrainContext";
+import { WagonType } from "@/features/Train/types";
 import { validateType }from "@/features/Train/utils/validateImage";
 
 interface WagonImageProps{
