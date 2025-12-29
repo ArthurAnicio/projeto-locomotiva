@@ -1,9 +1,14 @@
 import React from "react";
 import { NewDriverModal } from "@/features/Driver/NewDriverModal";
 
-describe("<NewDriverModal />", () => {
+const onCloseSpy = cy.stub().as("onCloseSpy");
+
+describe("NewDriverModal", () => {
+  beforeEach(() => {
+    cy.mount(<NewDriverModal onClose={onCloseSpy} />);
+  });
+
   it("Shouldn't send with empty values and show error messages", () => {
-    cy.mount(<NewDriverModal onClose={cy.spy()} />);
     cy.contains("button", "Salvar").click();
 
     cy.contains("Nome completo é obrigatório").should("be.visible");
@@ -13,12 +18,8 @@ describe("<NewDriverModal />", () => {
   });
 
   it("Should reject CHF in invalid format and invalid email", () => {
-    cy.mount(<NewDriverModal onClose={cy.spy()} />);
-
     cy.get('input[name="fullName"]').type("Nome Sobrenome");
-    
     cy.get('input[name="email"]').type("email-invalido").blur();
-    
     cy.get('input[name="chf"]').type("123456SP").blur();
 
     cy.get('input[name="shift"]').parent().click();
@@ -31,7 +32,6 @@ describe("<NewDriverModal />", () => {
   });
 
   it("Should accept valid values and call close()", () => {
-    cy.mount(<NewDriverModal onClose={cy.spy().as("closeSpy")} />);
     cy.window().then((win) => cy.stub(win, "alert").as("alertStub"));
 
     cy.get('input[name="fullName"]').type("João da Silva");
@@ -46,6 +46,6 @@ describe("<NewDriverModal />", () => {
     cy.contains("button", "Salvar").click();
 
     cy.get("@alertStub").should("have.been.calledOnce");
-    cy.get("@closeSpy").should("have.been.calledOnce");
+    cy.get("@onCloseSpy").should("have.been.calledOnce");
   });
 });

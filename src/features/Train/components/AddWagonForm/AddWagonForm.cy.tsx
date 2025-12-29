@@ -47,10 +47,8 @@ describe("AddWagonForm", () => {
       </TrainProvider>
     );
 
-    // Scroll + click nos tipos de vagão
     cy.contains(WagonType.Carga).scrollIntoView().click({ force: true });
     
-    // Botão com force para elementos sobrepostos
     cy.contains("button", "Adicionar").click({ force: true });
 
     cy.get("@onExit").should("have.been.calledOnce");
